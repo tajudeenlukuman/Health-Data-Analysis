@@ -126,6 +126,10 @@ For each year, the share of encounter classes (e.g., ambulatory, outpatient, eme
 - **Ambulatory** was the dominant class in most years
 - **Outpatient** led in **2021**
 
+<img width="689" height="319" alt="Screenshot 2025-07-31 174253" src="https://github.com/user-attachments/assets/5a9e04ae-3405-4dab-969b-5d45053dde67" />
+
+
+
 ### 🔹 Duration-Based Analysis
 
 - **95.87%** of all encounters lasted **less than 24 hours**
