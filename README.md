@@ -8,10 +8,10 @@ This project is a healthcare data analytics exercise using synthetic EHR (Electr
 
 We worked with four core tables:
 
-- **`patients`** – Demographic and clinical details of patients
-- **`encounters`** – Patient visits and associated healthcare events
-- **`procedures`** – Medical procedures undergone by patients
-- **`payers`** – Insurance provider information
+- **`patients`** – Demographic and clinical details of patients  
+- **`encounters`** – Patient visits and associated healthcare events  
+- **`procedures`** – Medical procedures undergone by patients  
+- **`payers`** – Insurance provider information  
 
 We duplicated each table to create working versions (`patients1`, `encounters1`, etc.) for cleaning and analysis without altering the raw data.
 
@@ -21,12 +21,9 @@ We duplicated each table to create working versions (`patients1`, `encounters1`,
 
 The following columns were dropped from `patients1` due to redundancy or high sparsity:
 
-- `suffix`
-- `prefix`
+- `suffix`, `prefix`, `maiden`
 - `lat`, `lon`
-- `maiden`
-- `zip`
-- `address`
+- `zip`, `address`
 
 These steps simplified the dataset for cleaner analysis and model-readiness.
 
@@ -69,35 +66,70 @@ These steps simplified the dataset for cleaner analysis and model-readiness.
 
 ### 🔹 Race Distribution
 
-| Race | % of Total |
-|------|------------|
-| White | ~70% |
-| Black | ~17% |
-| Asian | ~9% |
-| Other | ~2% |
-| Hawaiian | ~2% |
-| Native | ~1% |
+| Race     | % of Total |
+|----------|------------|
+| White    | ~70%       |
+| Black    | ~17%       |
+| Asian    | ~9%        |
+| Other    | ~2%        |
+| Hawaiian | ~2%        |
+| Native   | ~1%        |
 
 ### 🔹 Ethnicity
 
-| Ethnicity        | % |
-|------------------|----|
-| Non-Hispanic     | 80.39% |
-| Hispanic         | 19.61% |
+| Ethnicity     | % |
+|---------------|----|
+| Non-Hispanic  | 80.39% |
+| Hispanic      | 19.61% |
 
 ### 🔹 Intersectional Analysis
 
-- Race × Ethnicity
-- Gender × Ethnicity
+- Race × Ethnicity  
+- Gender × Ethnicity  
 
 These cross-tab analyses helped understand demographic patterns better.
 
 ---
 
-## 📍 Birthplace Insights
+## 🌍 Birthplace Insights
 
 - Most patients were born in **Boston, Massachusetts, US**
 - Birthplace data is heavily concentrated geographically
+
+---
+
+## 🧪 Encounter Analysis (encounters1)
+
+### 🔹 Overview
+
+- Total Encounters: **27,891**
+- Distinct Patients: **974**
+- Average Encounters per Patient: **28.64**
+- Median Encounters per Patient: **14**
+- 95% of patients had fewer than **100** encounters
+
+### 🔹 Yearly Encounter Distribution
+
+- Data spans from **2011 to 2022**
+- **2014** recorded the highest number of encounters
+- Some encounters span across different years (e.g., start in Dec and stop in Jan of the following year)
+
+### 🔹 Encounter Class Duration Check
+
+- **Ambulatory** and **Outpatient** classes are generally short (under a few hours)
+- However, anomalies exist (e.g., outpatient encounters spanning months or even years), likely due to data entry issues
+
+### 🔹 Encounter Class Breakdown (Yearly)
+
+For each year, the share of encounter classes (e.g., ambulatory, outpatient, emergency, etc.) was computed:
+
+- **Ambulatory** was the dominant class in most years
+- **Outpatient** led in **2021**
+
+### 🔹 Duration-Based Analysis
+
+- **95.87%** of all encounters lasted **less than 24 hours**
+- Only **4.13%** were over 24 hours, suggesting that most visits were short-term consultations or procedures
 
 ---
 
@@ -111,21 +143,21 @@ These cross-tab analyses helped understand demographic patterns better.
 
 ## ✅ What I Learned
 
-- Advanced SQL techniques (e.g., `PERCENTILE_CONT`, `PERCENTILE_DISC`)
-- Using `CASE`, `EXTRACT`, and `AGE()` for date operations
-- Data cleaning strategies and when to drop vs transform
-- Demographic segmentation using `GROUP BY` + window functions
-- Creating reusable and safe analysis workflows with table copies
+- Advanced SQL techniques (`PERCENTILE_CONT`, `PERCENTILE_DISC`, `CASE`, `AGE`, `EXTRACT`)
+- Data quality validation through temporal comparisons
+- Anomaly detection in timestamp-based event records
+- Encounter trend and class-based segmentation
+- Building multi-layered SQL queries for real-world healthcare data analysis
 
 ---
 
-## 🧠 Next Steps
+## 🔭 Next Steps
 
-- Analyze `encounters1` and `procedures1` to link visits to patient outcomes
-- Cost analysis: `BASE_ENCOUNTER_COST`, `TOTAL_CLAIM_COST`, `PAYER_COVERAGE`
-- Explore the payer system and insurance patterns
-- Join across tables for more holistic patient journeys
+- Analyze `procedures1` to tie procedures to patient encounters
+- Dive into cost data: `BASE_ENCOUNTER_COST`, `TOTAL_CLAIM_COST`, and `PAYER_COVERAGE`
+- Join patient + encounter + payer data to understand healthcare journeys and insurance implications
+- Develop dashboards from aggregated queries
 
 ---
 
-NB: The dataset was downloaded from https://mavenanalytics.io/
+**NB:** The dataset was downloaded from [Maven Analytics](https://mavenanalytics.io/).
