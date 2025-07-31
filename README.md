@@ -140,6 +140,7 @@ For each year, the share of encounter classes (e.g., ambulatory, outpatient, eme
 ## 🔧 Tech Stack
 
 - **PostgreSQL**
+- **DBeaver**
 - **pgAdmin 4**
 - **SQL (CTEs, CASE, aggregation, window functions)**
 
